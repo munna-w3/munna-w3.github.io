@@ -3,20 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jordan Lee — Software Developer</title>
-<meta name="description" content="Jordan Lee — software developer building playful, useful things for the web.">
+<title>m3h3d1.eth — Blockchain Security Researcher</title>
+<meta name="description" content="m3h3d1.eth — smart contract security researcher. Audits, bug bounties, and competitive research on Cantina, Immunefi, Sherlock, Code4rena and HackerOne.">
+<meta name="color-scheme" content="light dark">
 
 <!--
   ============================================================
   HOW TO MAKE THIS YOURS
-  1. Search for "Jordan Lee" and replace with your name.
-  2. Edit the <section id="hero"> code-window text (the fake
-     "const developer = {...}" object) with your real info.
-  3. Replace the PROJECTS array data inside <section id="projects">.
-  4. Update SKILLS, EXPERIENCE, and the CONTACT links/socials.
-  5. Swap "your.email@example.com" and social hrefs at the bottom.
-  6. Save this file as index.html at the root of your
-     <username>.github.io repo and push — that's it, no build step.
+  1. Search "m3h3d1.eth" — already set to your handle. Update
+     stats in .hero-meta and the code-window object with real numbers.
+  2. Edit the AUDITS cards (platform, role, focus, links, and the
+     "Protocols worked with" chips — replace "Protocol A/B/C..."
+     with the real names, or delete chips/cards you don't need).
+  3. Update EXPERIENCE timeline with your real history.
+  4. Swap contact links at the bottom (email, GitHub, X, platform profiles).
+  5. Theme: respects the OS light/dark setting on first visit, and
+     the toggle button in the nav lets a visitor override it —
+     the choice is remembered via localStorage.
+  6. Save as index.html at the root of your <username>.github.io
+     repo and push.
   ============================================================
 -->
 
@@ -24,27 +29,48 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+<script>
+  (function(){
+    var saved = localStorage.getItem('theme');
+    var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+
 <style>
   :root{
-    /* ---- Color tokens ---- */
     --base:      #FAFAF6;
     --base-2:    #F1EFE6;
     --ink:       #1B1B1F;
     --ink-soft:  #55545C;
-    --coral:     #FF6B52;
-    --coral-ink: #C4401F;
-    --sun:       #FFC83C;
-    --teal:      #12B3A0;
-    --grape:     #7C5CFC;
-    --line:      rgba(27,27,31,0.12);
     --card:      #FFFFFF;
+    --line:      rgba(27,27,31,0.12);
+    --shadow-col: rgba(27,27,31,0.35);
 
-    /* ---- Type tokens ---- */
+    --coral: #FF6B52; --coral-ink: #C4401F;
+    --sun:   #FFC83C;
+    --teal:  #12B3A0;
+    --grape: #7C5CFC;
+
     --display: "Bricolage Grotesque", system-ui, sans-serif;
     --body:    "Public Sans", system-ui, sans-serif;
     --mono:    "JetBrains Mono", ui-monospace, monospace;
-
     --radius: 18px;
+  }
+
+  html[data-theme="dark"]{
+    --base:      #131218;
+    --base-2:    #1B1A22;
+    --ink:       #F3F1EC;
+    --ink-soft:  #A6A4B2;
+    --card:      #1D1C25;
+    --line:      rgba(255,255,255,0.12);
+    --shadow-col: rgba(0,0,0,0.6);
+
+    --coral: #FF8268; --coral-ink: #FFB09E;
+    --sun:   #FFD35C;
+    --teal:  #2CD6C1;
+    --grape: #9C84FF;
   }
 
   *,*::before,*::after{ box-sizing:border-box; }
@@ -58,24 +84,19 @@
     font-size:16px;
     line-height:1.55;
     -webkit-font-smoothing:antialiased;
+    transition: background .2s ease, color .2s ease;
   }
 
-  /* subtle dot-grid texture on the base background */
   body{
-    background-image: radial-gradient(rgba(27,27,31,0.08) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(127,126,136,0.14) 1px, transparent 1px);
     background-size: 22px 22px;
   }
 
   img{ max-width:100%; display:block; }
   a{ color:inherit; }
-
   h1,h2,h3{ font-family:var(--display); margin:0; letter-spacing:-0.01em; }
 
-  .wrap{
-    max-width:1120px;
-    margin:0 auto;
-    padding:0 28px;
-  }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
 
   :focus-visible{
     outline: 3px solid var(--grape);
@@ -83,35 +104,47 @@
     border-radius: 6px;
   }
 
-  /* ---------------- NAV ---------------- */
   header.site{
     position:sticky; top:0; z-index:50;
-    background:rgba(250,250,246,0.86);
+    background:color-mix(in srgb, var(--base) 86%, transparent);
     backdrop-filter: blur(10px);
     border-bottom:1px solid var(--line);
   }
   .nav{
     display:flex; align-items:center; justify-content:space-between;
-    padding:18px 28px;
-    max-width:1120px; margin:0 auto;
+    padding:18px 28px; max-width:1120px; margin:0 auto; gap:16px;
   }
   .brand{
-    font-family:var(--display); font-weight:800; font-size:1.15rem;
-    text-decoration:none; display:flex; align-items:center; gap:8px;
+    font-family:var(--display); font-weight:800; font-size:1.1rem;
+    text-decoration:none; display:flex; align-items:center; gap:8px; white-space:nowrap;
   }
   .brand .dot{
-    width:10px; height:10px; border-radius:50%;
-    background:var(--coral);
+    width:10px; height:10px; border-radius:50%; background:var(--coral);
     box-shadow: 14px 0 0 -3px var(--sun), 26px 0 0 -3px var(--teal);
   }
-  nav.links{ display:flex; gap:28px; align-items:center; }
+  nav.links{ display:flex; gap:26px; align-items:center; }
   nav.links a{
-    text-decoration:none; font-weight:600; font-size:0.95rem;
-    color:var(--ink-soft);
+    text-decoration:none; font-weight:600; font-size:0.95rem; color:var(--ink-soft);
     padding:6px 2px; border-bottom:2px solid transparent;
     transition: color .15s ease, border-color .15s ease;
   }
   nav.links a:hover{ color:var(--ink); border-color:var(--coral); }
+
+  .nav-right{ display:flex; align-items:center; gap:12px; }
+
+  .theme-toggle{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:42px; height:42px; border-radius:999px;
+    border:2px solid var(--ink); background:transparent; color:var(--ink);
+    cursor:pointer; flex-shrink:0;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .theme-toggle:hover{ transform:translateY(-2px); box-shadow:3px 4px 0 var(--teal); }
+  .theme-toggle svg{ width:19px; height:19px; }
+  .theme-toggle .sun-icon{ display:none; }
+  html[data-theme="dark"] .theme-toggle .sun-icon{ display:block; }
+  html[data-theme="dark"] .theme-toggle .moon-icon{ display:none; }
+
   .btn{
     display:inline-flex; align-items:center; gap:8px;
     font-family:var(--body); font-weight:700; font-size:0.92rem;
@@ -126,79 +159,53 @@
   .navtoggle{ display:none; background:none; border:none; cursor:pointer; padding:6px; }
   .navtoggle span{ display:block; width:24px; height:2.5px; background:var(--ink); margin:5px 0; border-radius:2px; }
 
-  /* ---------------- HERO ---------------- */
-  section#hero{ padding:84px 0 60px; }
-  .hero-grid{
-    display:grid; grid-template-columns: 1.05fr 0.95fr;
-    gap:56px; align-items:center;
-  }
+  section#hero{ padding:76px 0 60px; }
+  .hero-grid{ display:grid; grid-template-columns: 1.05fr 0.95fr; gap:56px; align-items:center; }
   .eyebrow{
     display:inline-flex; align-items:center; gap:8px;
     font-family:var(--mono); font-size:0.82rem; font-weight:600;
-    color:var(--coral-ink); background:#FFEDE7;
-    border:1px solid #FFD3C6; padding:6px 12px; border-radius:999px;
-    margin-bottom:22px;
+    color:var(--coral-ink); background:color-mix(in srgb, var(--coral) 14%, var(--base));
+    border:1px solid color-mix(in srgb, var(--coral) 40%, var(--base));
+    padding:6px 12px; border-radius:999px; margin-bottom:22px;
   }
   .eyebrow::before{ content:"●"; color:var(--coral); font-size:0.6rem; }
 
-  h1.headline{
-    font-size:clamp(2.4rem, 5vw, 3.6rem);
-    font-weight:800; line-height:1.06;
-  }
-  h1.headline .hl{
-    background: linear-gradient(180deg, transparent 62%, var(--sun) 62%);
-  }
-  h1.headline .hl2{
-    background: linear-gradient(180deg, transparent 62%, var(--teal) 62%);
-    color: inherit;
-  }
+  h1.headline{ font-size:clamp(2.3rem, 4.8vw, 3.5rem); font-weight:800; line-height:1.08; }
+  h1.headline .hl{ background: linear-gradient(180deg, transparent 62%, var(--sun) 62%); }
+  h1.headline .hl2{ background: linear-gradient(180deg, transparent 62%, var(--teal) 62%); }
 
-  .lede{
-    margin-top:22px; font-size:1.12rem; color:var(--ink-soft); max-width:46ch;
-  }
+  .lede{ margin-top:22px; font-size:1.1rem; color:var(--ink-soft); max-width:48ch; }
   .hero-ctas{ display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; }
-
-  .hero-meta{
-    display:flex; gap:22px; margin-top:40px; flex-wrap:wrap;
-  }
-  .hero-meta div{ font-family:var(--mono); font-size:0.82rem; color:var(--ink-soft); }
+  .hero-meta{ display:flex; gap:22px; margin-top:40px; flex-wrap:wrap; }
+  .hero-meta div{ font-family:var(--mono); font-size:0.8rem; color:var(--ink-soft); }
   .hero-meta strong{ display:block; font-family:var(--display); font-size:1.3rem; color:var(--ink); font-weight:800; }
 
-  /* code window signature element */
   .code-window{
-    background:#1B1B1F; border-radius:16px;
-    box-shadow: 0 1px 0 rgba(0,0,0,0.4), 0 24px 50px -18px rgba(27,27,31,0.55);
-    overflow:hidden;
-    transform: rotate(1.2deg);
+    background:#131218; border-radius:16px;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.4), 0 24px 50px -18px var(--shadow-col);
+    overflow:hidden; transform: rotate(1.2deg); border:1px solid #2A2933;
   }
   .code-window .titlebar{
-    display:flex; align-items:center; gap:8px;
-    padding:12px 16px; background:#232228; border-bottom:1px solid #333;
+    display:flex; align-items:center; gap:8px; padding:12px 16px;
+    background:#1B1A21; border-bottom:1px solid #2E2D37;
   }
   .code-window .titlebar span{ width:11px; height:11px; border-radius:50%; display:inline-block; }
   .code-window .titlebar span:nth-child(1){ background:#FF6B52; }
   .code-window .titlebar span:nth-child(2){ background:#FFC83C; }
   .code-window .titlebar span:nth-child(3){ background:#12B3A0; }
-  .code-window .filename{
-    margin-left:8px; font-family:var(--mono); font-size:0.78rem; color:#9A99A2;
-  }
+  .code-window .filename{ margin-left:8px; font-family:var(--mono); font-size:0.78rem; color:#9A99A2; }
   .code-window pre{
     margin:0; padding:24px 22px 28px; font-family:var(--mono);
-    font-size:0.92rem; line-height:1.75; color:#E7E6EA; overflow-x:auto; min-height:260px;
+    font-size:0.88rem; line-height:1.75; color:#E7E6EA; overflow-x:auto; min-height:280px;
   }
-  .code-window code .k{ color:#FF9C86; }     /* keyword */
-  .code-window code .s{ color:#FFD873; }     /* string */
-  .code-window code .p{ color:#7FE0D3; }     /* property */
-  .code-window code .c{ color:#8A8992; }     /* comment */
-  .code-window code .f{ color:#B7A6FF; }     /* function/const */
-  .caret{
-    display:inline-block; width:8px; height:1.1em; background:#FF6B52;
-    vertical-align:text-bottom; margin-left:2px;
-    animation:blink 1s step-end infinite;
-  }
+  .code-window code .k{ color:#FF9C86; }
+  .code-window code .s{ color:#FFD873; }
+  .code-window code .p{ color:#7FE0D3; }
+  .code-window code .c{ color:#8A8992; }
+  .code-window code .f{ color:#B7A6FF; }
+  .caret{ display:inline-block; width:8px; height:1.1em; background:#FF6B52; vertical-align:text-bottom; margin-left:2px; animation:blink 1s step-end infinite; }
   @keyframes blink{ 50%{ opacity:0; } }
 
-  /* ---------------- SECTION HEADS ---------------- */
   .section-head{ margin-bottom:44px; max-width:60ch; }
   .kicker{
     font-family:var(--mono); font-size:0.82rem; font-weight:700;
@@ -210,19 +217,17 @@
 
   section{ padding:88px 0; }
   section#about{ border-top:1px solid var(--line); }
-  section#projects{ border-top:1px solid var(--line); background:var(--base-2); }
+  section#audits{ border-top:1px solid var(--line); background:var(--base-2); }
   section#experience{ border-top:1px solid var(--line); }
   section#contact{ border-top:1px solid var(--line); }
 
-  /* ---------------- ABOUT ---------------- */
   .about-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:56px; align-items:start; }
   .about-grid p{ color:var(--ink-soft); font-size:1.05rem; margin:0 0 16px; }
   .pill-cloud{ display:flex; flex-wrap:wrap; gap:10px; }
   .pill{
     font-family:var(--mono); font-size:0.85rem; font-weight:600;
     padding:8px 14px; border-radius:999px; border:1.5px solid var(--ink);
-    background:var(--card);
-    transition: transform .15s ease, background .15s ease;
+    background:var(--card); transition: transform .15s ease;
   }
   .pill:nth-child(4n+1){ box-shadow: 3px 3px 0 var(--coral); }
   .pill:nth-child(4n+2){ box-shadow: 3px 3px 0 var(--sun); }
@@ -230,23 +235,28 @@
   .pill:nth-child(4n+4){ box-shadow: 3px 3px 0 var(--grape); }
   .pill:hover{ transform: translate(-2px,-2px); }
 
-  /* ---------------- PROJECTS ---------------- */
   .project-grid{ display:grid; grid-template-columns:1fr 1fr; gap:26px; }
   .project-card{
     background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
-    padding:0; overflow:hidden;
-    transition: transform .18s ease, box-shadow .18s ease;
+    overflow:hidden; transition: transform .18s ease, box-shadow .18s ease;
     display:flex; flex-direction:column;
   }
-  .project-card:hover{ transform:translateY(-4px); box-shadow: 0 18px 34px -18px rgba(27,27,31,0.35); }
+  .project-card:hover{ transform:translateY(-4px); box-shadow: 0 18px 34px -18px var(--shadow-col); }
   .project-top{ height:8px; }
-  .project-card:nth-child(4n+1) .project-top{ background:var(--coral); }
-  .project-card:nth-child(4n+2) .project-top{ background:var(--sun); }
-  .project-card:nth-child(4n+3) .project-top{ background:var(--teal); }
-  .project-card:nth-child(4n+4) .project-top{ background:var(--grape); }
+  .project-card:nth-child(5n+1) .project-top{ background:var(--coral); }
+  .project-card:nth-child(5n+2) .project-top{ background:var(--sun); }
+  .project-card:nth-child(5n+3) .project-top{ background:var(--teal); }
+  .project-card:nth-child(5n+4) .project-top{ background:var(--grape); }
+  .project-card:nth-child(5n+5) .project-top{ background:var(--coral); }
   .project-body{ padding:26px 26px 24px; flex:1; display:flex; flex-direction:column; }
-  .project-body h3{ font-size:1.25rem; font-weight:800; }
-  .project-body .desc{ color:var(--ink-soft); margin-top:10px; font-size:0.98rem; flex:1; }
+  .project-body .plat-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .project-body h3{ font-size:1.2rem; font-weight:800; }
+  .status-pill{
+    font-family:var(--mono); font-size:0.7rem; font-weight:700; text-transform:uppercase;
+    padding:4px 9px; border-radius:6px; letter-spacing:0.03em; white-space:nowrap;
+    background:color-mix(in srgb, var(--teal) 16%, var(--base)); color:var(--teal);
+  }
+  .project-body .desc{ color:var(--ink-soft); margin-top:10px; font-size:0.96rem; flex:1; }
   .project-tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:18px; }
   .tag{
     font-family:var(--mono); font-size:0.74rem; font-weight:600;
@@ -256,12 +266,33 @@
   .project-links{ display:flex; gap:16px; margin-top:20px; }
   .project-links a{
     font-weight:700; font-size:0.9rem; text-decoration:none;
-    display:inline-flex; align-items:center; gap:6px;
     border-bottom:2px solid var(--ink); padding-bottom:1px;
   }
   .project-links a:hover{ border-color:var(--coral); }
 
-  /* ---------------- EXPERIENCE ---------------- */
+  .protocols{ margin-top:22px; padding-top:18px; border-top:1px dashed var(--line); }
+  .protocols .protocols-label{
+    font-family:var(--mono); font-size:0.72rem; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.05em; color:var(--ink-soft); display:block; margin-bottom:10px;
+  }
+  .protocol-list{ display:flex; flex-wrap:wrap; gap:8px; }
+  .protocol-chip{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:var(--mono); font-size:0.78rem; font-weight:600;
+    padding:5px 11px 5px 9px; border-radius:999px;
+    background:var(--base-2); border:1px solid var(--line); color:var(--ink);
+  }
+  .protocol-chip::before{
+    content:""; width:6px; height:6px; border-radius:50%; background:var(--coral); flex-shrink:0;
+  }
+  .protocol-chip{ transition: transform .15s ease, border-color .15s ease; }
+  .protocol-chip:hover{ transform:translateY(-1px); border-color:var(--ink); }
+  .project-card:nth-child(5n+1) .protocol-chip::before{ background:var(--coral); }
+  .project-card:nth-child(5n+2) .protocol-chip::before{ background:var(--sun); }
+  .project-card:nth-child(5n+3) .protocol-chip::before{ background:var(--teal); }
+  .project-card:nth-child(5n+4) .protocol-chip::before{ background:var(--grape); }
+  .project-card:nth-child(5n+5) .protocol-chip::before{ background:var(--coral); }
+
   .timeline{ position:relative; padding-left:36px; }
   .timeline::before{
     content:""; position:absolute; left:6px; top:6px; bottom:6px; width:2px;
@@ -282,7 +313,6 @@
   .tl-role{ color:var(--coral-ink); font-weight:600; font-size:0.95rem; margin-top:2px; }
   .tl-desc{ color:var(--ink-soft); margin-top:10px; max-width:65ch; }
 
-  /* ---------------- CONTACT ---------------- */
   .contact-card{
     background:var(--ink); color:var(--base);
     border-radius:28px; padding:64px 56px;
@@ -291,25 +321,25 @@
   }
   .contact-card::before{
     content:""; position:absolute; right:-60px; top:-60px; width:220px; height:220px;
-    background: radial-gradient(circle, var(--grape) 0%, transparent 70%);
-    opacity:0.5;
+    background: radial-gradient(circle, var(--grape) 0%, transparent 70%); opacity:0.5;
   }
-  .contact-card h2{ font-size:clamp(1.8rem,3.4vw,2.6rem); font-weight:800; position:relative; }
-  .contact-card p{ color:#C9C8CE; margin-top:14px; max-width:42ch; position:relative; }
+  .contact-card h2{ font-size:clamp(1.8rem,3.4vw,2.6rem); font-weight:800; position:relative; color:var(--base); }
+  .contact-card p{ color:color-mix(in srgb, var(--base) 72%, transparent); margin-top:14px; max-width:42ch; position:relative; }
   .contact-actions{ display:flex; flex-direction:column; gap:14px; position:relative; }
   .contact-actions a{
-    text-decoration:none; font-weight:700; font-family:var(--mono);
-    padding:14px 20px; border-radius:12px; background:#28272D;
-    border:1px solid #3A3940; display:flex; justify-content:space-between; align-items:center;
+    text-decoration:none; font-weight:700; font-family:var(--mono); color:var(--base);
+    padding:14px 20px; border-radius:12px;
+    background:color-mix(in srgb, var(--base) 10%, transparent);
+    border:1px solid color-mix(in srgb, var(--base) 18%, transparent);
+    display:flex; justify-content:space-between; align-items:center;
     transition: background .15s ease, transform .15s ease;
   }
-  .contact-actions a:hover{ background:#33323A; transform:translateX(3px); }
+  .contact-actions a:hover{ background:color-mix(in srgb, var(--base) 16%, transparent); transform:translateX(3px); }
   .contact-actions a .arrow{ color:var(--coral); }
 
   footer{ padding:36px 0 48px; text-align:center; }
   footer p{ color:var(--ink-soft); font-size:0.88rem; font-family:var(--mono); }
 
-  /* ---------------- RESPONSIVE ---------------- */
   @media (max-width: 880px){
     nav.links{ display:none; }
     .navtoggle{ display:block; }
@@ -331,112 +361,116 @@
 
 <header class="site">
   <div class="nav">
-    <a href="#hero" class="brand"><span class="dot"></span>Jordan Lee</a>
+    <a href="#hero" class="brand"><span class="dot"></span>m3h3d1.eth</a>
     <nav class="links">
       <a href="#about">About</a>
-      <a href="#projects">Projects</a>
+      <a href="#audits">Audits</a>
       <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a href="#contact" class="btn">Say hello</a>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false">
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+      <a href="#contact" class="btn">Hire me</a>
+    </div>
   </div>
 </header>
 
 <main>
 
-  <!-- ================= HERO ================= -->
   <section id="hero">
     <div class="wrap hero-grid">
       <div>
-        <span class="eyebrow">Open to new projects</span>
+        <span class="eyebrow">Actively auditing</span>
         <h1 class="headline">
-          I build <span class="hl">playful</span>, dependable
-          software <span class="hl2">for the web.</span>
+          I break <span class="hl">smart contracts</span>
+          before <span class="hl2">attackers do.</span>
         </h1>
         <p class="lede">
-          I'm Jordan — a full-stack developer who likes clean APIs,
-          fast interfaces, and shipping things that make people smile.
-          Currently building tools for small teams.
+          I'm m3h3d1.eth — an independent blockchain security researcher.
+          I audit Solidity codebases, hunt for exploitable bugs, and compete
+          on Cantina, Immunefi, Sherlock, Code4rena and HackerOne. College
+          dropout by choice — I learned this by breaking things, not sitting in lectures.
         </p>
         <div class="hero-ctas">
-          <a href="#projects" class="btn">View my work</a>
+          <a href="#audits" class="btn">See my audits</a>
           <a href="#contact" class="btn ghost">Get in touch</a>
         </div>
         <div class="hero-meta">
-          <div><strong>5+</strong>years building</div>
-          <div><strong>30+</strong>projects shipped</div>
-          <div><strong>3</strong>open-source libraries</div>
+          <div><strong>50+</strong>contests entered</div>
+          <div><strong>20+</strong>valid findings</div>
+          <div><strong>5</strong>platforms active on</div>
         </div>
       </div>
 
       <div class="code-window" aria-hidden="true">
         <div class="titlebar">
           <span></span><span></span><span></span>
-          <span class="filename">about-me.js</span>
+          <span class="filename">researcher.js</span>
         </div>
-        <pre><code><span class="k">const</span> <span class="f">developer</span> = {
-  <span class="p">name</span>: <span class="s">"Jordan Lee"</span>,
-  <span class="p">role</span>: <span class="s">"Full-Stack Developer"</span>,
-  <span class="p">based_in</span>: <span class="s">"Remote / Earth"</span>,
-  <span class="p">stack</span>: [<span class="s">"TypeScript"</span>, <span class="s">"React"</span>,
-           <span class="s">"Node"</span>, <span class="s">"Postgres"</span>],
-  <span class="p">loves</span>: [<span class="s">"tiny animations"</span>,
-          <span class="s">"good docs"</span>, <span class="s">"coffee"</span>],
+        <pre><code><span class="k">const</span> <span class="f">researcher</span> = {
+  <span class="p">ens</span>: <span class="s">"m3h3d1.eth"</span>,
+  <span class="p">role</span>: <span class="s">"Smart Contract Security Researcher"</span>,
+  <span class="p">focus</span>: [<span class="s">"Solidity"</span>, <span class="s">"EVM internals"</span>,
+          <span class="s">"Fuzzing"</span>, <span class="s">"Invariant testing"</span>],
+  <span class="p">platforms</span>: [<span class="s">"Cantina"</span>, <span class="s">"Immunefi"</span>,
+             <span class="s">"Sherlock"</span>, <span class="s">"Code4rena"</span>,
+             <span class="s">"HackerOne"</span>],
+  <span class="p">background</span>: <span class="s">"college dropout, self-taught"</span>,
   <span class="p">available</span>: <span class="k">true</span>,
-  <span class="p">sayHi</span>: () <span class="k">=></span> <span class="s">"let's build something"</span>,
+  <span class="p">findBug</span>: () <span class="k">=></span> <span class="s">"critical, most likely"</span>,
 };<span class="caret"></span>
 
-<span class="c">// scroll down to see what I've shipped ↓</span></code></pre>
+<span class="c">// scroll down for audits & findings ↓</span></code></pre>
       </div>
     </div>
   </section>
 
-  <!-- ================= ABOUT ================= -->
   <section id="about">
     <div class="wrap about-grid">
       <div>
         <span class="kicker">01 / About</span>
-        <h2>A little about how I work.</h2>
+        <h2>Self-taught, by design.</h2>
         <p style="margin-top:20px;">
-          I'm a software developer focused on building products that feel
-          fast and fun to use, without cutting corners on the fundamentals.
-          I care about accessible interfaces, honest error states, and code
-          that the next person can actually read.
+          I dropped out of college by choice to focus on smart contract
+          security full-time — reading protocol code, reproducing real
+          exploits, and learning the EVM from the bytecode up. No regrets.
         </p>
         <p>
-          Outside of client work, I maintain a couple of small open-source
-          tools and I'm slowly working through a side project that turns
-          spreadsheets into tiny web apps.
+          These days I split my time between competitive audit contests and
+          private engagements, chasing the kind of bugs that only show up
+          when you actually try to break the invariants a protocol claims to hold.
         </p>
       </div>
       <div>
-        <span class="kicker">Tools I reach for</span>
+        <span class="kicker">Tools &amp; techniques</span>
         <div class="pill-cloud">
-          <span class="pill">TypeScript</span>
-          <span class="pill">React</span>
-          <span class="pill">Next.js</span>
-          <span class="pill">Node.js</span>
-          <span class="pill">PostgreSQL</span>
-          <span class="pill">GraphQL</span>
-          <span class="pill">Tailwind CSS</span>
-          <span class="pill">Docker</span>
-          <span class="pill">Figma</span>
+          <span class="pill">Solidity</span>
+          <span class="pill">Foundry</span>
+          <span class="pill">Slither</span>
+          <span class="pill">Echidna</span>
+          <span class="pill">Mythril</span>
+          <span class="pill">Fuzz Testing</span>
+          <span class="pill">Invariant Testing</span>
+          <span class="pill">Static Analysis</span>
+          <span class="pill">EVM Internals</span>
+          <span class="pill">Formal Verification</span>
           <span class="pill">Python</span>
-          <span class="pill">AWS</span>
-          <span class="pill">Vitest</span>
+          <span class="pill">Rust</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= PROJECTS ================= -->
-  <section id="projects">
+  <section id="audits">
     <div class="wrap">
       <div class="section-head">
-        <span class="kicker">02 / Selected work</span>
-        <h2>A few things I've built</h2>
-        <p>Swap these four cards with your own projects — title, one-line
-          pitch, tech tags, and links to the repo or live demo.</p>
+        <span class="kicker">02 / Where I work</span>
+        <h2>Audits, contests &amp; bounties</h2>
+        <p>Replace these with links to your real profiles, past reports,
+          and standout findings on each platform.</p>
       </div>
 
       <div class="project-grid">
@@ -444,64 +478,92 @@
         <div class="project-card">
           <div class="project-top"></div>
           <div class="project-body">
-            <h3>Palette</h3>
-            <p class="desc">A color-palette generator that extracts accessible
-              UI palettes from any uploaded image, with contrast checks built in.</p>
-            <div class="project-tags">
-              <span class="tag">React</span><span class="tag">Canvas API</span><span class="tag">a11y</span>
+            <div class="plat-head"><h3>Cantina</h3><span class="status-pill">Active</span></div>
+            <p class="desc">Competitive and private audit engagements for
+              protocols across DeFi and infrastructure, working alongside vetted senior researchers.</p>
+            <div class="project-tags"><span class="tag">Solo audits</span><span class="tag">Competitions</span></div>
+            <div class="protocols">
+              <span class="protocols-label">Protocols worked with</span>
+              <div class="protocol-list">
+                <span class="protocol-chip">Protocol A</span>
+                <span class="protocol-chip">Protocol B</span>
+                <span class="protocol-chip">Protocol C</span>
+              </div>
             </div>
-            <div class="project-links">
-              <a href="#">Live demo →</a>
-              <a href="#">GitHub →</a>
-            </div>
+            <div class="project-links"><a href="#">Profile →</a><a href="#">Reports →</a></div>
           </div>
         </div>
 
         <div class="project-card">
           <div class="project-top"></div>
           <div class="project-body">
-            <h3>Standup Bot</h3>
-            <p class="desc">A Slack bot that collects async standups and turns
-              them into a readable daily digest, saving the team a 20-minute meeting.</p>
-            <div class="project-tags">
-              <span class="tag">Node.js</span><span class="tag">Slack API</span><span class="tag">Postgres</span>
+            <div class="plat-head"><h3>Immunefi</h3><span class="status-pill">Active</span></div>
+            <p class="desc">Live bug bounty hunting on production protocols,
+              reporting exploitable vulnerabilities before they reach mainnet attackers.</p>
+            <div class="project-tags"><span class="tag">Bug bounty</span><span class="tag">Critical / High</span></div>
+            <div class="protocols">
+              <span class="protocols-label">Protocols worked with</span>
+              <div class="protocol-list">
+                <span class="protocol-chip">Protocol D</span>
+                <span class="protocol-chip">Protocol E</span>
+              </div>
             </div>
-            <div class="project-links">
-              <a href="#">Live demo →</a>
-              <a href="#">GitHub →</a>
-            </div>
+            <div class="project-links"><a href="#">Profile →</a></div>
           </div>
         </div>
 
         <div class="project-card">
           <div class="project-top"></div>
           <div class="project-body">
-            <h3>Sheet2App</h3>
-            <p class="desc">Turns a Google Sheet into a small CRUD web app in
-              under a minute — forms, filters, and a shareable link included.</p>
-            <div class="project-tags">
-              <span class="tag">Next.js</span><span class="tag">Sheets API</span><span class="tag">tRPC</span>
+            <div class="plat-head"><h3>Sherlock</h3><span class="status-pill">Active</span></div>
+            <p class="desc">Time-boxed audit contests reviewing protocol code
+              for logic errors, access control gaps, and economic exploits.</p>
+            <div class="project-tags"><span class="tag">Contests</span><span class="tag">DeFi</span></div>
+            <div class="protocols">
+              <span class="protocols-label">Protocols worked with</span>
+              <div class="protocol-list">
+                <span class="protocol-chip">Protocol F</span>
+                <span class="protocol-chip">Protocol G</span>
+                <span class="protocol-chip">Protocol H</span>
+              </div>
             </div>
-            <div class="project-links">
-              <a href="#">Live demo →</a>
-              <a href="#">GitHub →</a>
-            </div>
+            <div class="project-links"><a href="#">Profile →</a></div>
           </div>
         </div>
 
         <div class="project-card">
           <div class="project-top"></div>
           <div class="project-body">
-            <h3>Focus Timer</h3>
-            <p class="desc">A tiny, delightful Pomodoro timer with ambient
-              sound mixing and streak tracking, built as a weekend project.</p>
-            <div class="project-tags">
-              <span class="tag">TypeScript</span><span class="tag">Web Audio</span><span class="tag">PWA</span>
+            <div class="plat-head"><h3>Code4rena</h3><span class="status-pill">Active</span></div>
+            <p class="desc">Competitive audits ("arenas") across a wide range
+              of protocol types, competing against a global pool of researchers.</p>
+            <div class="project-tags"><span class="tag">Contests</span><span class="tag">Findings</span></div>
+            <div class="protocols">
+              <span class="protocols-label">Protocols worked with</span>
+              <div class="protocol-list">
+                <span class="protocol-chip">Protocol I</span>
+                <span class="protocol-chip">Protocol J</span>
+              </div>
             </div>
-            <div class="project-links">
-              <a href="#">Live demo →</a>
-              <a href="#">GitHub →</a>
+            <div class="project-links"><a href="#">Profile →</a></div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-top"></div>
+          <div class="project-body">
+            <div class="plat-head"><h3>HackerOne</h3><span class="status-pill">Active</span></div>
+            <p class="desc">Broader web2/web3 vulnerability disclosure work —
+              reporting issues responsibly through coordinated bounty programs.</p>
+            <div class="project-tags"><span class="tag">Disclosure</span><span class="tag">Bounty</span></div>
+            <div class="protocols">
+              <span class="protocols-label">Protocols worked with</span>
+              <div class="protocol-list">
+                <span class="protocol-chip">Protocol K</span>
+                <span class="protocol-chip">Protocol L</span>
+              </div>
             </div>
+            <div class="project-links"><a href="#">Profile →</a></div>
           </div>
         </div>
 
@@ -509,68 +571,52 @@
     </div>
   </section>
 
-  <!-- ================= EXPERIENCE ================= -->
   <section id="experience">
     <div class="wrap">
       <div class="section-head">
         <span class="kicker">03 / Experience</span>
-        <h2>Where I've worked</h2>
+        <h2>How I got here</h2>
       </div>
 
       <div class="timeline">
         <div class="tl-item">
-          <div class="tl-head">
-            <h3>Senior Frontend Developer</h3>
-            <span class="tl-when">2023 — Present</span>
-          </div>
-          <div class="tl-role">Brightloop Studio</div>
-          <p class="tl-desc">Leading the frontend for a design-tools startup;
-            rebuilt the core editor for a 3x speed improvement and mentored two junior developers.</p>
+          <div class="tl-head"><h3>Independent Security Researcher</h3><span class="tl-when">Present</span></div>
+          <div class="tl-role">Cantina · Immunefi · Sherlock · Code4rena · HackerOne</div>
+          <p class="tl-desc">Auditing smart contracts across competitive
+            contests and private engagements, with findings ranging from
+            gas optimizations to critical fund-draining exploits.</p>
         </div>
         <div class="tl-item">
-          <div class="tl-head">
-            <h3>Full-Stack Developer</h3>
-            <span class="tl-when">2021 — 2023</span>
-          </div>
-          <div class="tl-role">Northwind Labs</div>
-          <p class="tl-desc">Built and shipped customer-facing features across
-            the stack for a B2B SaaS product, from database schema to UI polish.</p>
+          <div class="tl-head"><h3>Started competing in audit contests</h3><span class="tl-when">Year — Year</span></div>
+          <div class="tl-role">Self-directed</div>
+          <p class="tl-desc">Began entering public contests to build a track
+            record, learning by reading real production codebases and past
+            post-mortems of exploited protocols.</p>
         </div>
         <div class="tl-item">
-          <div class="tl-head">
-            <h3>Junior Developer</h3>
-            <span class="tl-when">2019 — 2021</span>
-          </div>
-          <div class="tl-role">Freelance</div>
-          <p class="tl-desc">Delivered websites and small web apps for local
-            businesses, handling everything from client calls to deployment.</p>
-        </div>
-        <div class="tl-item">
-          <div class="tl-head">
-            <h3>B.Sc. Computer Science</h3>
-            <span class="tl-when">2015 — 2019</span>
-          </div>
-          <div class="tl-role">State University</div>
-          <p class="tl-desc">Focused on systems and human-computer interaction; graduated with honors.</p>
+          <div class="tl-head"><h3>Left college to self-teach security</h3><span class="tl-when">Year</span></div>
+          <div class="tl-role">Self-taught, full-time</div>
+          <p class="tl-desc">Made the call to drop out and go all-in on
+            smart contract security — Solidity, the EVM, and offensive
+            security fundamentals, learned outside a classroom.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= CONTACT ================= -->
   <section id="contact">
     <div class="wrap">
       <div class="contact-card">
         <div>
-          <h2>Got a project in mind?<br>Let's talk.</h2>
-          <p>I'm currently available for freelance work and full-time
-            opportunities. The fastest way to reach me is email.</p>
+          <h2>Have a protocol that<br>needs a second pair of eyes?</h2>
+          <p>Open to private audits and consulting. ENS below is the
+            fastest way to find and verify me on-chain.</p>
         </div>
         <div class="contact-actions">
+          <a href="https://app.ens.domains/m3h3d1.eth" target="_blank" rel="noopener">m3h3d1.eth <span class="arrow">↗</span></a>
           <a href="mailto:your.email@example.com">your.email@example.com <span class="arrow">↗</span></a>
-          <a href="https://github.com/abc" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a>
-          <a href="https://linkedin.com/in/abc" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
-          <a href="https://twitter.com/abc" target="_blank" rel="noopener">Twitter / X <span class="arrow">↗</span></a>
+          <a href="https://github.com/m3h3d1" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a>
+          <a href="https://twitter.com/m3h3d1" target="_blank" rel="noopener">Twitter / X <span class="arrow">↗</span></a>
         </div>
       </div>
     </div>
@@ -579,14 +625,35 @@
 </main>
 
 <footer>
-  <p>Designed &amp; built by Jordan Lee · © <span id="year"></span></p>
+  <p>Designed &amp; built by m3h3d1.eth · © <span id="year"></span></p>
 </footer>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Mobile nav toggle (progressive enhancement — nav links remain
-  // reachable via anchor scrolling even without JS).
+  (function(){
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+
+    function setPressed(){
+      btn.setAttribute('aria-pressed', root.getAttribute('data-theme') === 'dark' ? 'true' : 'false');
+    }
+    setPressed();
+
+    btn.addEventListener('click', function(){
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      setPressed();
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e){
+      if(localStorage.getItem('theme')) return;
+      root.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+      setPressed();
+    });
+  })();
+
   (function(){
     var nav = document.querySelector('header.site .nav');
     if(!nav) return;
@@ -594,7 +661,7 @@
     toggle.className = 'navtoggle';
     toggle.setAttribute('aria-label', 'Toggle menu');
     toggle.innerHTML = '<span></span><span></span><span></span>';
-    nav.insertBefore(toggle, nav.querySelector('.btn'));
+    nav.insertBefore(toggle, nav.querySelector('.nav-right'));
 
     var links = nav.querySelector('.links');
     toggle.addEventListener('click', function(){
